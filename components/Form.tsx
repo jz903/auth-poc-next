@@ -1,16 +1,16 @@
 "use client";
-import { useRef } from "react";
+import { FormEvent } from "react";
 
 export default function Form() {
-  const emailRef = useRef<HTMLInputElement>(null);
-
-  const handleUserLogin = async (e: any) => {
+  const handleUserLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email");
     const res = await fetch("/api/auth/login", {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: emailRef?.current?.value,
+        email,
       }),
     });
 
@@ -19,7 +19,7 @@ export default function Form() {
     }
   };
 
-  const handleUserLogout = async (e: any) => {
+  const handleUserLogout = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const res = await fetch("/api/auth/logout", {
       method: "POST",
@@ -32,7 +32,7 @@ export default function Form() {
   return (
     <>
       <form onSubmit={handleUserLogin}>
-        <input name="email" type="email" placeholder="Email" ref={emailRef} />
+        <input name="email" type="email" placeholder="Email" />
         <br />
         <button type="submit">Login</button>
       </form>

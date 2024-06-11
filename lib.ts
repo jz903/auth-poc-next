@@ -20,10 +20,9 @@ export async function decrypt(input: string): Promise<any> {
   return payload;
 }
 
-export async function login(formData: FormData) {
+export async function login(values: { email: string }) {
   // Verify credentials && get the user
-
-  const user = { email: formData.get("email"), name: "John" };
+  const user = { email: values.email, name: "John" };
 
   // Create the session
   const expires = new Date(Date.now() + 10 * 1000);

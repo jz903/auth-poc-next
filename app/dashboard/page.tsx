@@ -1,14 +1,15 @@
 import { getSession, login, logout } from "@/lib";
 
-import Form from "@/components/Form";
+import Logout from "@/components/Logout";
 
 export default async function Page() {
   const session = await getSession();
 
   return (
     <section>
-      <Form />
-      <pre>{JSON.stringify(session, null, 2)}</pre>
+      <h1>Dashboard</h1>
+      <pre>current user: {JSON.stringify(session, null, 2)}</pre>
+      <Logout />
     </section>
   );
 }

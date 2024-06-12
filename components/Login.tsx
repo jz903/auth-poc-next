@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent } from "react";
 
-export default function Form() {
+export default function Login() {
   const handleUserLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -15,18 +15,7 @@ export default function Form() {
     });
 
     if (res.ok) {
-      window.location.href = "/";
-    }
-  };
-
-  const handleUserLogout = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const res = await fetch("/api/auth/logout", {
-      method: "POST",
-    });
-
-    if (res.ok) {
-      window.location.href = "/";
+      window.location.href = "/dashboard";
     }
   };
   return (
@@ -35,9 +24,6 @@ export default function Form() {
         <input name="email" type="email" placeholder="Email" />
         <br />
         <button type="submit">Login</button>
-      </form>
-      <form onSubmit={handleUserLogout}>
-        <button type="submit">Logout</button>
       </form>
     </>
   );
